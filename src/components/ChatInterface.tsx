@@ -1,8 +1,8 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Image, Mic, Paperclip, Loader2, ArrowLeft } from 'lucide-react';
 import { useConversation } from '../lib/context';
+import { useNavigate } from 'react-router-dom';
 import MessageItem from './MessageItem';
 import UploadButton from './UploadButton';
 import { Button } from './ui/button';
@@ -12,8 +12,8 @@ const ChatInterface: React.FC = () => {
   const [showImageUpload, setShowImageUpload] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { currentConversation, addMessage, isProcessing, createNewConversation } = useConversation();
+  const navigate = useNavigate();
   
-  // Create a new conversation if one doesn't exist
   useEffect(() => {
     if (!currentConversation) {
       createNewConversation();
@@ -42,13 +42,9 @@ const ChatInterface: React.FC = () => {
   };
   
   const handleBackButton = () => {
-    // Cette fonction pourrait être utilisée plus tard pour naviguer vers une page précédente
-    // ou pour afficher une liste de conversations
-    console.log('Back button clicked');
-    // Pour l'instant, cela sert juste à illustrer que le bouton fonctionne
+    navigate('/');
   };
   
-  // Check if currentConversation is null or messages are empty
   const showEmptyState = !currentConversation || currentConversation.messages.length === 0;
   
   return (
