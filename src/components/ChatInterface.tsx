@@ -1,10 +1,11 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Image, Mic, Paperclip, Loader2 } from 'lucide-react';
+import { Send, Image, Mic, Paperclip, Loader2, ArrowLeft } from 'lucide-react';
 import { useConversation } from '../lib/context';
 import MessageItem from './MessageItem';
 import UploadButton from './UploadButton';
+import { Button } from './ui/button';
 
 const ChatInterface: React.FC = () => {
   const [input, setInput] = useState('');
@@ -40,11 +41,30 @@ const ChatInterface: React.FC = () => {
     setShowImageUpload(prev => !prev);
   };
   
+  const handleBackButton = () => {
+    // Cette fonction pourrait être utilisée plus tard pour naviguer vers une page précédente
+    // ou pour afficher une liste de conversations
+    console.log('Back button clicked');
+    // Pour l'instant, cela sert juste à illustrer que le bouton fonctionne
+  };
+  
   // Check if currentConversation is null or messages are empty
   const showEmptyState = !currentConversation || currentConversation.messages.length === 0;
   
   return (
     <div className="flex flex-col h-full max-w-3xl mx-auto">
+      <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm border-b border-border px-4 py-2">
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          onClick={handleBackButton}
+          className="mr-2"
+        >
+          <ArrowLeft className="h-5 w-5" />
+          <span className="sr-only">Retour</span>
+        </Button>
+      </div>
+      
       <div className="flex-1 overflow-y-auto px-4 pb-4">
         <div className="py-4 space-y-6">
           {showEmptyState ? (
