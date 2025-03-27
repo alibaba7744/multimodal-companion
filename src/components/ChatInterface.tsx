@@ -1,7 +1,6 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Image, Mic, PaperClip, Loader2 } from 'lucide-react';
+import { Send, Image, Mic, Paperclip, Loader2 } from 'lucide-react';
 import { useConversation } from '../lib/context';
 import MessageItem from './MessageItem';
 import UploadButton from './UploadButton';
@@ -46,7 +45,7 @@ const ChatInterface: React.FC = () => {
                 className="max-w-md"
               >
                 <div className="size-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <PaperClip className="size-10 text-primary/70" />
+                  <Paperclip className="size-10 text-primary/70" />
                 </div>
                 <h2 className="text-2xl font-semibold mb-2">Multimodal Assistant</h2>
                 <p className="text-muted-foreground mb-6">
