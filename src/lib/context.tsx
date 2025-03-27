@@ -6,7 +6,7 @@ interface ConversationContextType {
   conversations: Conversation[];
   currentConversation: Conversation | null;
   isProcessing: boolean;
-  createNewConversation: () => void;
+  createNewConversation: () => Conversation;
   addMessage: (message: Omit<Message, 'id' | 'timestamp'>) => Promise<void>;
   setProcessing: (isProcessing: boolean) => void;
 }

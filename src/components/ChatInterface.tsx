@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Image, Mic, Paperclip, Loader2 } from 'lucide-react';
@@ -9,7 +10,14 @@ const ChatInterface: React.FC = () => {
   const [input, setInput] = useState('');
   const [showImageUpload, setShowImageUpload] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const { currentConversation, addMessage, isProcessing } = useConversation();
+  const { currentConversation, addMessage, isProcessing, createNewConversation } = useConversation();
+  
+  // Create a new conversation if one doesn't exist
+  useEffect(() => {
+    if (!currentConversation) {
+      createNewConversation();
+    }
+  }, [currentConversation, createNewConversation]);
   
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,11 +40,14 @@ const ChatInterface: React.FC = () => {
     setShowImageUpload(prev => !prev);
   };
   
+  // Check if currentConversation is null or messages are empty
+  const showEmptyState = !currentConversation || currentConversation.messages.length === 0;
+  
   return (
     <div className="flex flex-col h-full max-w-3xl mx-auto">
       <div className="flex-1 overflow-y-auto px-4 pb-4">
         <div className="py-4 space-y-6">
-          {currentConversation?.messages.length === 0 ? (
+          {showEmptyState ? (
             <div className="h-full flex flex-col items-center justify-center text-center px-4 py-12">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
